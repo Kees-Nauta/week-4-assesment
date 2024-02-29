@@ -5,7 +5,7 @@ const fortunesList = document.getElementById('fortunes-list')
 const addFortuneForm = document.getElementById('addFortuneForm');
 
 const getCompliment = () => {
-    axios.get("http://localhost:4000/api/compliment/")
+    axios.get("/api/compliment/")
         .then(res => {
             const data = res.data;
             alert(data);
@@ -13,7 +13,7 @@ const getCompliment = () => {
 }
 
 const getFortune = () => {
-    axios.get(`http://localhost:4000/api/fortune/`)
+    axios.get(`/api/fortune/`)
     .then(res => {
         const data = res.data;
         alert(data);
@@ -21,7 +21,7 @@ const getFortune = () => {
 }
 
 const getAllFortunes = () => {
-    axios.get('http://localhost:4000/api/allfortunes')
+    axios.get('/api/allfortunes')
     .then(response => {
         const allFortunes = response.data;
         fortunesList.innerHTML = '';
@@ -59,7 +59,7 @@ const getAllFortunes = () => {
 
 const deleteFortune = (id) => {
     console.log("Deleting fortune with id:", id);
-    axios.delete(`http://localhost:4000/api/fortune/${id}`)
+    axios.delete(`/api/fortune/${id}`)
       .then(() => {
         getAllFortunes();
       })
@@ -74,7 +74,7 @@ addFortuneForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
     const fortuneInput = document.getElementById('fortuneInput').value;
-    axios.post('http://localhost:4000/api/fortune', { fortune: fortuneInput })
+    axios.post('/api/fortune', { fortune: fortuneInput })
         .then(response => {
             alert(response.data.message);
             

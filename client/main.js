@@ -84,12 +84,13 @@ addFortuneForm.addEventListener('submit', function(event) {
         });
 });
 const editFortune = (id, newFortune) => {
-    axios.put(`http://localhost:4000/api/fortune/${id}`, { fortune: newFortune })
+    axios.put(`/api/fortune/${id}`, { fortune: newFortune })
         .then(response => {
             alert(response.data.message);
             getAllFortunes();
         })
         .catch(error => {
+            rollbar.error(`editing error`)
             console.error('Error editing:', error);
         });
 };

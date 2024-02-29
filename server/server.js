@@ -34,6 +34,7 @@ app.get('/trigger-error', (req, res) => {
 
 app.use(cors());
 app.use(express.json());
+app.get(`/trolled`, (req, res) => {rollbar.error("bruh error")})
 
 app.get("/api/fortune", getFortune);
 app.get("/api/compliment", getCompliment);

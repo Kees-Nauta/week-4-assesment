@@ -64,6 +64,7 @@ const updateFortune = (req, res) => {
   const index = fortunes.findIndex((f) => f.id === id);
   if (index !== -1) {
     fortunes[index].fortune = fortune;
+    rollbar.info('Someone edited a fortune')
     res
       .status(200)
       .send({ message: "Fortune updated ", fortune: fortunes[index] });

@@ -35,11 +35,22 @@ app.get('/trigger-error', (req, res) => {
 app.use(cors());
 app.use(express.json());
 
+const nonExistentFunction = (num) => {
+  num + 3
+}
+try {
+  nonExistentFunction();
+} catch (error) {
+  rollbar.error(`Bruh`);
+  // Expected output: ReferenceError: nonExistentFunction is not defined
+  // (Note: the exact output may be browser-dependent)
+}
 
-app.get(`/trolled`, (req, res) => {
-  req.body = 1 + 2
-  res.status(200).send(trolled).catch(error => rollbar.error("bruh error"))
-  })
+
+// app.get(`/trolled`, (req, res) => {
+//   const trolled = 1 + 2; // Calculate the value of trolled
+//   res.status(200).send(`${trolled}`).catch(error => rollbar.error("bruh error")); // Send the value of trolled as a string
+// });
 
 app.get("/api/fortune", getFortune);
 app.get("/api/compliment", getCompliment);

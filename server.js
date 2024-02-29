@@ -23,6 +23,14 @@ const {
   updateFortune,
 } = require("./controller");
 
+app.get('/trigger-error', (req, res) => {
+  try {
+    nonExistentFunction();
+  } catch (err) {
+    rollbar.error(err, req);
+  }
+  res.send('Error triggered');
+});
 
 app.use(cors());
 app.use(express.json());
